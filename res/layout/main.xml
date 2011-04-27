@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="fill_parent"
+  android:layout_height="fill_parent" android:orientation="vertical">
+    <CheckedTextView android:text="@string/URL" android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/checkedTextView1"></CheckedTextView>
+    <EditText android:layout_height="wrap_content" android:layout_width="fill_parent" android:id="@+id/editURL"></EditText>
+    <CheckedTextView android:text="@string/TITLE" android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/checkedTextView2"></CheckedTextView>
+    <EditText android:layout_height="wrap_content" android:layout_width="fill_parent" android:id="@+id/editTitle"></EditText>
+    <LinearLayout android:layout_height="wrap_content" android:id="@+id/linearLayout1" android:layout_width="fill_parent">
+        <Button android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/buttonPost" android:text="@string/POST"></Button>
+        <Button android:layout_height="wrap_content" android:layout_width="wrap_content" android:text="@string/CANCEL" android:id="@+id/buttonCancelPost"></Button>
+    </LinearLayout>
+</LinearLayout>

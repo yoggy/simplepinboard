@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hello World, ConfigActivity!</string>
+    <string name="app_name">SimplePinboard</string>
+    <string name="OK">OK</string>
+    <string name="CANCEL">Cancel</string>
+    <string name="POST">POST</string>
+    <string name="USERNAME">Username</string>
+    <string name="PASSWORD">Password</string>
+    <string name="URL">URL</string>
+    <string name="TITLE">title</string>
+    <string name="DESCRIPTION">description</string>
+    <string name="PINBOARD_USERNAME">pinboard username</string>
+    <string name="PINBOARD_PASSWORD">password</string>
+</resources>

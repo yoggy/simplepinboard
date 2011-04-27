@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="fill_parent"
+  android:layout_height="fill_parent" android:orientation="vertical">
+    <CheckedTextView android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/checkedTextView1" android:text="@string/USERNAME"></CheckedTextView>
+    <EditText android:layout_height="wrap_content" android:layout_width="fill_parent" android:id="@+id/editUsername" android:hint="@string/PINBOARD_USERNAME" android:inputType="textEmailAddress"></EditText>
+    <CheckedTextView android:text="@string/PASSWORD" android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/checkedTextView2"></CheckedTextView>
+    <EditText android:layout_height="wrap_content" android:layout_width="fill_parent" android:id="@+id/editPassword" android:hint="@string/PINBOARD_PASSWORD" android:inputType="textPassword"></EditText>
+    <LinearLayout android:layout_height="wrap_content" android:id="@+id/linearLayout1" android:layout_width="fill_parent">
+        <Button android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/buttonOK" android:text="@string/OK"></Button>
+        <Button android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/buttonCancel" android:text="@string/CANCEL"></Button>
+    </LinearLayout>
+</LinearLayout>
