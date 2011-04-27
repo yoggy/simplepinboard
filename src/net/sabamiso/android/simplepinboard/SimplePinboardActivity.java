@@ -41,6 +41,8 @@ public class SimplePinboardActivity extends Activity implements Runnable {
     EditText editTitle;
     String username;
     String password;
+    String url;
+    String title;
     
     ProgressDialog progress;  
     Thread thread;
@@ -54,19 +56,25 @@ public class SimplePinboardActivity extends Activity implements Runnable {
         editURL = (EditText)findViewById(R.id.editURL);
         editTitle = (EditText)findViewById(R.id.editTitle);
 
+        Intent intent = getIntent();
+    	title = intent.getStringExtra(Intent.EXTRA_SUBJECT);
+    	if (title != null) editTitle.setText(title);
+    	
+    	url = intent.getStringExtra(Intent.EXTRA_TEXT);
+    	if (url != null) editURL.setText(url);
+
         pref = getSharedPreferences("pref",MODE_PRIVATE);
         username = pref.getString("username", "");
         password = pref.getString("password", "");
-
-        Intent intent = getIntent();
-        if (Intent.ACTION_SEND.equals(intent.getAction())) {
-        	String subject = intent.getStringExtra(Intent.EXTRA_SUBJECT);
-        	if (subject != null) editTitle.setText(subject);
-        	
-        	String url = intent.getStringExtra(Intent.EXTRA_TEXT);
-        	if (url != null) editURL.setText(url);
+        if (username == "") {
+        	Intent config_intent = new Intent(this, ConfigActivity.class);
+        	config_intent.setAction(Intent.ACTION_VIEW);
+        	config_intent.putExtra(Intent.EXTRA_TEXT, url);
+        	config_intent.putExtra(Intent.EXTRA_SUBJECT, title);
+        	startActivity(config_intent);
+        	return;
         }
-
+        
         Button buttonPost = (Button) findViewById(R.id.buttonPost);
         buttonPost.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,7 +97,10 @@ public class SimplePinboardActivity extends Activity implements Runnable {
             	int code = msg.getData().getInt("code");
             	finishPost(code);
             }
-        };   
+        };
+        
+        //
+        startPost();
     }
     
 	@Override
@@ -99,6 +110,9 @@ public class SimplePinboardActivity extends Activity implements Runnable {
     }
 
     void startPost() {
+    	url   = editURL.getText().toString();
+    	title = editTitle.getText().toString();
+    	
     	progress = new ProgressDialog(this);
     	progress.setTitle("Simple Pinboard");
     	progress.setMessage("Post to Pinboard.in...");
@@ -117,15 +131,12 @@ public class SimplePinboardActivity extends Activity implements Runnable {
 
 	@Override
 	public void run() {
-		int code = do_http_access();
+		int code = do_http_access(url, title);
 		thread = null;
 		send_finish_message(code);
 	}
 	
-    int do_http_access() {
-    	String url   = editURL.getText().toString();
-    	String title = editTitle.getText().toString();
-
+    int do_http_access(String url, String title) {
     	String get_url = pinboard_base_url;
     	get_url += "?url=";
     	get_url += URLEncoder.encode(url);

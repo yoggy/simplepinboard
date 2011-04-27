@@ -2,6 +2,7 @@ package net.sabamiso.android.simplepinboard;
 
 import net.sabamiso.android.simplepinboard.R;
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -15,11 +16,18 @@ public class ConfigActivity extends Activity {
     EditText editUsername;
     EditText editPassword;
     
+    String url;
+    String title;
+    
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.config);
-
+        
+        Intent intent = getIntent();
+        url = intent.getStringExtra(Intent.EXTRA_TEXT);
+        title = intent.getStringExtra(Intent.EXTRA_SUBJECT);
+        
         pref = getSharedPreferences("pref",MODE_PRIVATE);
         
         editUsername = (EditText)findViewById(R.id.editUsername);
@@ -41,7 +49,17 @@ public class ConfigActivity extends Activity {
             	e.commit();
             	
                 Toast.makeText(ConfigActivity.this, "Save Configuration",Toast.LENGTH_LONG).show();
-                ConfigActivity.this.finish();
+                
+                if (url != null) {
+                	Intent intent = new Intent(ConfigActivity.this, SimplePinboardActivity.class);
+                	intent.setAction(Intent.ACTION_VIEW);
+                	intent.putExtra(Intent.EXTRA_TEXT, url);
+                	intent.putExtra(Intent.EXTRA_SUBJECT, title);
+                	startActivity(intent);
+                }
+                else {
+                	ConfigActivity.this.finish();
+                }
             }
         });
 
